@@ -29,12 +29,13 @@ func InitPWM() {
 }
 
 // Configure configures a PWM pin for output.
-func (pwm PWM) Configure() {
+func (pwm PWM) Configure() error {
 	if pwm.Pin < 8 {
 		avr.DDRD.SetBits(1 << uint8(pwm.Pin))
 	} else {
 		avr.DDRB.SetBits(1 << uint8(pwm.Pin-8))
 	}
+	return nil
 }
 
 // Set turns on the duty cycle for a PWM pin using the provided value. On the AVR this is normally a
